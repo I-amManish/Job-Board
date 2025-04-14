@@ -13,17 +13,20 @@ const isAuthenticated = (req, res, next) => {
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-        if (!decoded) {
+        if (!decoded || !decoded.userId) {
             return res.status(401).json({
                 message: "Invalid token",
                 success: false,
             });
         }
 
-        req.id = decoded.userId;
+        req.user = { id: decoded.userId }; // Standardized to req.user.id
         next();
     } catch (error) {
-        console.error("Auth middleware error:", error.message);
+        console.error("Auth middleware error:", {
+            error: error.message,
+            token: req.cookies.token
+        });
 
         return res.status(401).json({
             message: "Unauthorized access",
