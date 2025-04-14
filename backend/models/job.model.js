@@ -10,7 +10,8 @@ const jobSchema = new mongoose.Schema({
         required: true
     },
     requirements: {
-        type: String
+        type: [String], // Changed from String to array of strings
+        required: true
     },
     salary: {
         type: Number,
@@ -37,7 +38,7 @@ const jobSchema = new mongoose.Schema({
         ref: 'Company',
         required: true
     },
-    createdBy: { // changed from CreatedBy to createdBy
+    createdBy: { // Correct field name
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
@@ -49,7 +50,7 @@ const jobSchema = new mongoose.Schema({
         }
     ]
 }, {
-    timestamps: true //note: optional 
+    timestamps: true
 });
 
 export const Job = mongoose.model("Job", jobSchema);
