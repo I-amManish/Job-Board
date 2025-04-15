@@ -1,10 +1,21 @@
-import { Button } from "@/components/ui/button"
+import Navbar from "./components/shared/Navbar"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home  from "./components/Home/Home";
+import Login from "./components/auth/Login";
+import Signup from "./components/auth/Signup";
+
 
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-svh">
-      <Button>Click me</Button>
-    </div>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </Router>
+    </>
   )
 }
 
